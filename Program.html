@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <script>
+        // Write - Your - Code - Here
+
+const addLink = () => {
+    const urlStarter = "http://";
+    let newUrl = "";
+    let link = "";
+    const title = prompt("what's the title of the article");
+    const author = prompt("who's the author of the article");
+    const url = prompt("whats the url of the article");
+    if (url.startsWith("http://") || url.startsWith("https://")){link = `title ${title},url: ${url}, author: ${author}`} 
+    else{ newUrl = urlStarter + url;
+        link = `title: ${title},url: ${newUrl}, author: ${author}`; };
+    return link;
+}
+let saveNewLink = [];
+const saveArticle = (newLink) => {
+    saveNewLink.push(newLink);
+    return saveNewLink;
+}
+const viewLinks = (allLinks) => {
+    for (let article of allLinks){
+        `${article}`;
+    }
+}
+
+
+const optionMenu = () => {
+    let option = -1;
+    let link = "";
+    let allArticles = [];
+    while (option != 0) {
+    option = Number(prompt("Choose an option: \n1: Show links \n2: Add a link \n3: Remove a link \n0: Quit"));
+   switch (option){
+       case 1:
+        //alert(allArticles);
+       alert(viewLinks(allArticles));
+       break;
+       case 2:
+       link = addLink();
+       allArticles = saveArticle(link);
+        console.log(allArticles);
+       break;
+       case 3:
+
+       break;
+       case 0:
+       console.log("GoodBye!!");
+       break;
+       default: 
+       alert("Choose a valid option");
+       break;
+   }
+    }
+}
+optionMenu();
+
+    </script>
+</body>
