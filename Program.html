@@ -4,25 +4,28 @@
 </head>
 <body>
     <script>
-        let saveNewLink = [];
+        // start array to store the books
+let saveNewLink = [];
+        // function to add links to the list
 const addLink = (articles) => {
     const urlStarter = "http://";
     let newUrl = "";
     let link = "";
-    const title = prompt("what's the title of the article");
-    const author = prompt("who's the author of the article");
-    const url = prompt("whats the url of the article");
+    const title = prompt("What's the title of the article");
+    const author = prompt("Who's the author of the article");
+    const url = prompt("What's the url of the article");
     if (url.startsWith("http://") || url.startsWith("https://")){link = `title ${title} url: ${url} author: ${author}\n`} 
     else{ newUrl = urlStarter + url;
         link = `title: ${title} url: ${newUrl} author: ${author}\n`; };
     return link;
 }
-
+    // function to save the newly created article
 const saveArticle = (newLink) => {
     
     saveNewLink.push(newLink);
     return saveNewLink;
 }
+    // function to display a string with all of the articles
 const viewLinks = (allLinks) => {
     let finalString = "";
     for (let i = 0; i < allLinks.length;i++){
@@ -30,9 +33,16 @@ const viewLinks = (allLinks) => {
     }
     return finalString;
 }
-
+    // function to remove a link from the array
 const removeLink = (allLinks) => {
-    const num = Number(prompt("enter the index of the link to be removed (between 1 and " + allLinks.length + "):"))
+    if (allLinks.length == 0){
+        alert("No links available");
+    } else {
+    const num = Number(prompt("Enter the index of the link to be removed (between 1 and " + allLinks.length + "):"));
+    
+    if (num < allLinks.length || num > allLinks.length){
+        alert("Choose a valid number");
+    }
     for (let i = 0; i < allLinks.length;i++){
         if (allLinks[i] == allLinks[num - 1]){
             allLinks.splice(i,1);
@@ -40,7 +50,9 @@ const removeLink = (allLinks) => {
         }
     }
 }
-
+}
+    // function to display all of the options on a prompt
+    // 0 to exist the function
 const optionMenu = () => {
     let option = -1;
     let link = "";
@@ -51,7 +63,10 @@ const optionMenu = () => {
    switch (option){
        case 1:
         finalString = viewLinks(allArticles);
-        alert(finalString);
+        if (finalString == "") {
+            alert("No links available");
+        } else alert(finalString);
+        
        break;
        case 2:
        link = addLink(allArticles);
@@ -68,7 +83,7 @@ const optionMenu = () => {
    }
     }
 }
-
+// execution of the function for the menu
 optionMenu();
 
     </script>
