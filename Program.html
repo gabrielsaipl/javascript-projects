@@ -4,6 +4,7 @@
 </head>
 <body>
     <script>
+        let saveNewLink = [];
 const addLink = (articles) => {
     const urlStarter = "http://";
     let newUrl = "";
@@ -11,25 +12,34 @@ const addLink = (articles) => {
     const title = prompt("what's the title of the article");
     const author = prompt("who's the author of the article");
     const url = prompt("whats the url of the article");
-    if (url.startsWith("http://") || url.startsWith("https://")){link = `${articles.length + 1}: title ${title} url: ${url} author: ${author}\n`} 
+    if (url.startsWith("http://") || url.startsWith("https://")){link = `title ${title} url: ${url} author: ${author}\n`} 
     else{ newUrl = urlStarter + url;
-        link = `${articles.length + 1}: title: ${title} url: ${newUrl} author: ${author}\n`; };
+        link = `title: ${title} url: ${newUrl} author: ${author}\n`; };
     return link;
 }
-let saveNewLink = [];
+
 const saveArticle = (newLink) => {
+    
     saveNewLink.push(newLink);
     return saveNewLink;
 }
 const viewLinks = (allLinks) => {
     let finalString = "";
     for (let i = 0; i < allLinks.length;i++){
-        finalString += allLinks[i];
+        finalString += (i + 1) + ": " + allLinks[i];
     }
-    console.log(finalString);
     return finalString;
 }
 
+const removeLink = (allLinks) => {
+    const num = Number(prompt("enter the index of the link to be removed (between 1 and " + allLinks.length + "):"))
+    for (let i = 0; i < allLinks.length;i++){
+        if (allLinks[i] == allLinks[num - 1]){
+            allLinks.splice(i,1);
+            continue;
+        }
+    }
+}
 
 const optionMenu = () => {
     let option = -1;
@@ -41,20 +51,16 @@ const optionMenu = () => {
    switch (option){
        case 1:
         finalString = viewLinks(allArticles);
-        console.log(finalString);
         alert(finalString);
-       
        break;
        case 2:
        link = addLink(allArticles);
        allArticles = saveArticle(link);
-        console.log(allArticles);
        break;
        case 3:
-
+        removeLink(allArticles);
        break;
        case 0:
-       console.log("GoodBye!!");
        break;
        default: 
        alert("Choose a valid option");
@@ -62,6 +68,7 @@ const optionMenu = () => {
    }
     }
 }
+
 optionMenu();
 
     </script>
